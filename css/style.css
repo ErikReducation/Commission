@@ -1,12 +1,12 @@
 #content {
   font-family:Andale Mono, monospace;
-  color: dark green;
+  color: yellow;
   margin-left:50px;
   margin-top:50px;
 }
 body {
   background-image: url(../images/royalty-free-sales.jpg);
 }
-a {
+#kudos {
   color:black;
 }
