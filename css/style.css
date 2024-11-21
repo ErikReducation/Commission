@@ -9,4 +9,7 @@ body {
 }
 #kudos {
   color:black;
+  a {
+    color:black;
+  }
 }
