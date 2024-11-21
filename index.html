@@ -13,7 +13,7 @@
     <!--
     <style>
       div {
-       border: double cornflowerblue;
+        border: double cornflowerblue;
     }
     </style>
     -->
@@ -39,10 +39,12 @@
     //Ask for name. Validate input.
     do {
     name = prompt('Enter name.');
-    if (typeof name === null || name.trim().length === 0 ){//check input validity. Checks for null string (cancel), empty string (length===0), and whitespace string (.trim())
-      alert('Invalid input. Input must not be empty. If you don\'t have a name, make one up now.');
-    } else {
+    if ( name != null && name.trim().length!=0){//check input validity. Checks for null string (cancel), empty string, and whitespace string (.trim())
       nameIsValid = true;
+    
+    } else {
+      
+      alert('Invalid input. Input must not be empty. If you don\'t have a name, make one up now.');
     }
     } while (!nameIsValid)//do this loop until the user inputs a valid name
 
@@ -54,21 +56,26 @@
 
     //save input as string to compare for validity and exit condition
     input = prompt(`Hi ${name}, Please enter the dollar amount of your sales a single sale at a time. Enter Done when you are finished.`); 
-   
-    //check input validity 
-    if (typeof input === null || input.trim().length === 0){
-      alert(`Invalid input. Input must not be empty. Input should be a number or 'Done'.`);
-    } else if (input === 'Done') {//Skip updating subtotal, don't confuse the program
+
+    //check input validity for null or empty response
+    if (input != null && input.trim().length!=0)
+    {
+      if (input === 'Done') {//Skip updating subtotal, don't confuse the program
       inputIsValid = true;//exit loop before updating subtotal
-    } else {//Input is a valid string that isn't 'Done', which hopefully means it is a number stored as a string
-      
+
+      } else {//input is valid and isn't 'Done'
+
       // use unary plus to add input to subtotal
       subtotal += +input;
       inputIsValid = true;//exit loop AFTER updating subtotal
+      }
+    }  else {
+      alert(`Invalid input. Input must not be empty. Input should be a number or 'Done'.`);
+      
     }
-   
+
       } while (!inputIsValid)
-   
+
     //Check if done
     if (input === 'Done') {
       Done = true;//Exit loop.
@@ -82,8 +89,11 @@
     //$500.00 - $999.99 equals  10% commission
     //$1000 and over equals 15%  commission
     //efficient if-else tree
-    
-    if (subtotal > 0 && subtotal < 500)
+
+    if (subtotal === 0) {
+      //rate is still zero, no updates to commRate
+      rateOutput = "0%";
+    } else if ( subtotal < 500)
     {
       commRate = 0.05;
       rateOutput = "5%";
@@ -91,15 +101,10 @@
     {
       commRate = 0.1;
       rateOutput = "10%";
-    } else if (subtotal != 0) //subtotal is not zero and is not less than 1000, so it is 1000+
+    } else  //subtotal is not zero and is not less than 1000, so it is 1000+
     {
       commRate = 0.15;
       rateOutput = "15%";
-    }
-    else //subtotal is zero
-    {
-      //rate is still zero, no updates
-      rateOutput = "0%";
     }
     commTotal = subtotal * commRate;
     total = subtotal + commTotal;
