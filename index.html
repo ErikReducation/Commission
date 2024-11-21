@@ -1,24 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="description" content="An academic project.">
-<meta name="keywords" content="Commission">
-<meta name="author" content="Erik Rosenbalm">
-<meta name="viewport" content="width=device-width">  
-<title>Commission</title>
-<link href="css/style.css" rel="stylesheet" type="text/css" >
-<!--Margin view. TURN THIS OFF BEFORE PUBLISHING-->
-<!--
-<style>
-div {
-border: double cornflowerblue;
-}
-</style>
--->
+  <head>
+  <meta charset="utf-8">
+  <meta name="description" content="An academic project.">
+  <meta name="keywords" content="Commission">
+  <meta name="author" content="Erik Rosenbalm">
+  <meta name="viewport" content="width=device-width">  
+  <title>Commission</title>
+  <link href="css/style.css" rel="stylesheet" type="text/css" >
+  
+    <!--Margin view. TURN THIS OFF BEFORE PUBLISHING-->
+    <!--
+    <style>
+      div {
+       border: double cornflowerblue;
+    }
+    </style>
+    -->
+    
 </head>
 <body>
-<script>
-</script>
+  <p id= "content"></p>
+  
+  <script>
+    let name = "";
+    let input = "";
+    let subtotal = 0;
+    let commRate = 0;
+    let commTotal = 0;
+    let total = 0;
+    let nameIsValid = false;
+    let inputIsValid = false;
+    let Done = false;
+    string rateOutput = "";
+    
+      //Handle cases where user clicks 'cancel' in prompt() => function returns 'null' => if (typeof name === null). Whitespace/empty: if (str.trim().length === 0)
+    
+    //Ask for name. Validate input.
+    do {
+    name = prompt('Enter name.');
+    if (typeof name === null || name.trim().length === 0 ){//check input validity. Checks for null string (cancel), empty string (length===0), and whitespace string (.trim())
+      alert('Invalid input. Input must not be empty. If you don\'t have a name, make one up now.');
+    } else {
+      nameIsValid = true;
+    }
+    } while (!nameIsValid)//do this loop until the user inputs a valid name
+
+    
+    //Begin loop.  
+    do {
+      do { //Ask for sale. Validate input. 0 is a valid sale. Null entry rejected. First entry 'Done' must output zero.
+    
+
+    //save input as string to compare for validity and exit condition
+    input = prompt(`Hi ${name}, Please enter the dollar amount of your sales a single sale at a time. Enter Done when you are finished.`); 
+   
+    //check input validity 
+    if (typeof input === null || input.trim().length === =){
+      alert(`Invalid input. Input must not be empty. Input should be a number or 'Done'.`);
+    } else if (input === 'Done') {//Skip updating subtotal, don't confuse the program
+      inputIsValid = true;//exit loop before updating subtotal
+    } else {//Input is a valid string that isn't 'Done', which hopefully means it is a number stored as a string
+      
+      // use unary plus to add input to subtotal
+      subtotal += +input;
+      inputIsValid = true;//exit loop AFTER updating subtotal
+    }
+   
+      } while (!inputIsValid)
+   
+    //Check if done
+    if (input === 'Done') {
+      Done = true;//Exit loop.
+    } else {}
+    //Go back to getting another sale input
+    } while (!Done)
+    //Calculate commission rate, commission amount, and total.
+    // Subtotal Commission Rate
+    //0 and below  equals 0% commission
+    //$0.01 - $499.99 equals 5% commission
+    //$500.00 - $999.99 equals  10% commission
+    //$1000 and over equals 15%  commission
+    //efficient if-else tree
+    
+    if (subtotal > 0 && subtotal < 500)
+    {
+      commRate = 0.05;
+      rateOutput = "5%";
+    } else if (subtotal < 1000)
+    {
+      commRate = 0.1;
+      rateOutput = "10%";
+    } else if (subtotal != 0) //subtotal is not zero and is not less than 1000, so it is 1000+
+    {
+      commRate = 0.15;
+      rateOutput = "15%";
+    }
+    else //subtotal is zero
+    {
+      //rate is still zero, no updates
+      rateOutput = "0%";
+    }
+    commTotal = subtotal * commRate;
+    total = subtotal + commTotal;
+    //Display results.
+    document.getElementById('content').innerHTML = `Hello ${name}, here is your Weekly Commission Report. <br> <br> Your sales total is ${subtotal:c}, so your commission rate is ${rateOutput} 
+    <br> Your total commission is ${commTotal:c}. <br> Your total earnings are ${total:c}`;
+  </script>
+  
 </body>
 </html>
