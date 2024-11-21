@@ -103,9 +103,9 @@
     }
     commTotal = subtotal * commRate;
     total = subtotal + commTotal;
-    const subtotal$ = new Intl.NumberFormat().format(subtotal);//thank you MDN https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
-    const commTotal$ = new Intl.NumberFormat().format(commTotal);
-    const total$ = new Intl.NumberFormat().format(total);
+    const subtotal$ = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(subtotal);//thank you MDN https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat
+    const commTotal$ = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(commTotal);
+    const total$ = Intl.NumberFormat('en-US', {style: 'currency', currency: 'USD'}).format(total);
     //Display results.
     document.getElementById('content').innerHTML = `Hello ${name}, here is your Weekly Commission Report. <br> <br> Your sales total is ${subtotal$}, so your commission rate is ${rateOutput} 
     <br> Your total commission is ${commTotal$}. <br> Your total earnings are ${total$}`;
