@@ -32,7 +32,7 @@
     let nameIsValid = false;
     let inputIsValid = false;
     let Done = false;
-    string rateOutput = "";
+    let rateOutput = "";
     
       //Handle cases where user clicks 'cancel' in prompt() => function returns 'null' => if (typeof name === null). Whitespace/empty: if (str.trim().length === 0)
     
@@ -56,7 +56,7 @@
     input = prompt(`Hi ${name}, Please enter the dollar amount of your sales a single sale at a time. Enter Done when you are finished.`); 
    
     //check input validity 
-    if (typeof input === null || input.trim().length === =){
+    if (typeof input === null || input.trim().length === 0){
       alert(`Invalid input. Input must not be empty. Input should be a number or 'Done'.`);
     } else if (input === 'Done') {//Skip updating subtotal, don't confuse the program
       inputIsValid = true;//exit loop before updating subtotal
@@ -104,8 +104,8 @@
     commTotal = subtotal * commRate;
     total = subtotal + commTotal;
     //Display results.
-    document.getElementById('content').innerHTML = `Hello ${name}, here is your Weekly Commission Report. <br> <br> Your sales total is ${subtotal:c}, so your commission rate is ${rateOutput} 
-    <br> Your total commission is ${commTotal:c}. <br> Your total earnings are ${total:c}`;
+    document.getElementById('content').innerHTML = `Hello ${name}, here is your Weekly Commission Report. <br> <br> Your sales total is ${subtotal}:c, so your commission rate is ${rateOutput} 
+    <br> Your total commission is ${commTotal}:c. <br> Your total earnings are ${total}:c`;
   </script>
   
 </body>
